@@ -10,12 +10,19 @@
 <body>
     <div class="particles" id="particles"></div>
     
-    <div class="print-btn-container">
-        <button onclick="window.print()" class="glow-btn">
-            <span class="btn-icon">📥</span>
-            <span>СОХРАНИТЬ PDF</span>
-        </button>
-    </div>
+    <!-- Навигация (добавлено) -->
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html" class="active">📚 Руководство</a>
+            <a href="train_schedule.html">🚂 Расписание</a>
+        </div>
+        <div class="nav-widget">
+            <div id="msk-clock" class="nav-clock">⏳ --:--</div>
+            <div id="nav-player-info" class="nav-player">🔍 Загрузка...</div>
+        </div>
+    </nav>
+    
+    
 
     <div class="document-container">
         <header class="main-header">
@@ -32,6 +39,13 @@
                 <span class="version-number">2026.ELITE</span>
             </div>
         </header>
+        
+        <div class="print-btn-container">
+          <button onclick="window.print()" class="glow-btn">
+              <span class="btn-icon">📥</span>
+              <span>СОХРАНИТЬ PDF</span>
+          </button>
+      </div>
 
         <section class="intro-section">
             <div class="section-icon">📖</div>
@@ -45,6 +59,50 @@
                 </div>
             </div>
         </section>
+
+        <section class="content-section">
+          <div class="section-number">11</div>
+          <h2>📜 ПРАВИЛА АЛЬЯНСА И ДИПЛОМАТИЯ</h2>
+      
+          <div class="golden-rule-box">
+              <span class="rule-emoji">🚫</span>
+              <div class="rule-content">
+                  <strong>НА СЕРВЕРЕ ДЕЙСТВУЕТ ЗАПРЕТ НА ГРАБЁЖ:</strong><br>
+                  • Запрещено грабить транспорт<br>
+                  • Запрещено грабить спецоперации<br>
+                  • Запрещено грабить топ-15 альянсов<br><br>
+                  Нарушение правил ведёт к санкциям.
+              </div>
+          </div>
+      
+          <div class="info-box">
+              <div class="info-icon">⚖️</div>
+              <div class="info-content">
+                  <strong>Если вы заметили нарушение:</strong><br>
+                  Не решайте вопросы самостоятельно. Немедленно обращайтесь к <strong>Лидеру</strong> или <strong>Дворецкому</strong>. Мы оперативно разберём ситуацию и применим меры.
+              </div>
+          </div>
+      
+          <h3>🤝 НАШИ СОЮЗНИКИ</h3>
+          <p>Мы поддерживаем дипломатические отношения и взаимовыручку со следующими альянсами:</p>
+          <div class="allies-container">
+              <span class="ally-tag">[BUFF]</span>
+              <span class="ally-tag">[IMP1]</span>
+              <span class="ally-tag">[DVG]</span>
+              <span class="ally-tag">[DDQ]</span>
+              <span class="ally-tag">[YOP]</span>
+              <span class="ally-tag">[Luna]</span>
+              <span class="ally-tag">[BaD]</span>
+              <span class="ally-tag">[DSC]</span>
+              <span class="ally-tag">[GOV]</span>
+              <span class="ally-tag">[LVG]</span>
+              <span class="ally-tag">[TKE]</span>
+              <span class="ally-tag">[imp2]</span>
+              <span class="ally-tag">[RPG]</span>
+              <span class="ally-tag">[Las]</span>
+              <span class="ally-tag">[Veri]</span>
+          </div>
+      </section>
 
         <section class="content-section">
             <div class="section-number">04</div>
@@ -169,7 +227,14 @@
                         <span class="day-icon">🏗️</span>
                     </div>
                     <ul class="day-tasks">
-                        <li><strong>Строительство:</strong> тратим ускорения на здания, если заранее ставили что-то крупное, то сохраняем, не жмём галочку тогда, оставляем до вторника. Также после повышения уровня дают здания, их можно подкопить, также проверяйте, у зданий могут быть бесплатные прокачки.</li>
+                        <li><strong>Строительство:</strong> 
+
+                          - Тратим ускорения на здания. 
+                          - Если заранее поставили какое-то крупное здание на прокачку, то не жмите галочку сразу. Оставьте его готовым до вторника. 
+                          
+                          - Также после повышения уровня базы появляются новые здания, их тоже можно подкопить. 
+                          
+                          -Проверяйте у некоторых зданий бывают бесплатные прокачки( в основном это здания с производством ресурсов) </li>
                         <li><strong>Грузовик:</strong> стараемся получить оранжевый (легендарный) грузовик. Тыкаем на иконку
                             <div class="image-showcase">
                                 <img src="images/8.jpg" alt="Грузовик" class="task-image">
@@ -201,8 +266,6 @@
                                 <img src="images/1.png" alt="Сундуки" class="task-image">
                             </div>
                         </li>
-
-
                     </ul>
                 </div>
 
@@ -257,6 +320,164 @@
                 </div>
             </div>
         </section>
+
+        <section class="content-section">
+          <div class="section-number">10</div>
+          <h2>🤝 КОЛЛАБА: VS БИТВА АЛЬЯНСОВ + ГОТОВНОСТЬ К МИССИИ</h2>
+          
+          <p><strong>Два ивента одновременно — одни и те же действия дают очки в оба ивента.</strong></p>
+      
+          <div class="golden-rule-box">
+              <span class="rule-emoji">✅</span>
+              <div class="rule-content">
+                  <strong>VS Битва Альянсов</strong> и <strong>Готовность к миссии</strong> идут параллельно.<br>
+                  Одни и те же действия приносят очки <strong>В ОБА ИВЕНТА СРАЗУ</strong>.<br>
+                  Ты качаешь базу, героев, бойца, солдат — и получаешь награды из двух сундуков одновременно.<br>
+                  ⏳ <strong>Не трать ресурсы просто так!</strong> Жди нужный день — тогда получишь максимум профита.
+              </div>
+          </div>
+      
+          <h3>📅 ПОНЕДЕЛЬНИК</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Завершаем задания Радара</li>
+              <li>Улучшаем бойца (части бойца, боевые чипы)</li>
+              <li>Тратим выносливость на спецоперации</li>
+              <li>Тратим опыт на прокачку героев</li>
+              <li>Используем ускорения на строительство</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Радар, боец, выносливость, опыт героев, ускорения стройки → <strong>Готовность к миссии</strong></li>
+              <li>Завершенные постройки (+1 Мощь) → <strong>VS Битва</strong></li>
+          </ul>
+      
+          <h3>📅 ВТОРНИК</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Выполняем оранжевую миссию в Спецоперациях (жуем жетоны)</li>
+              <li>Отправляем легендарный грузовик (контракты конвоя)</li>
+              <li>Копим задания Радара на завтра (не тратим сегодня!)</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Оранжевая миссия, легендарный грузовик → <strong>VS Битва</strong></li>
+              <li>Накопление Радара → очки пойдут в <strong>Готовность к миссии</strong> завтра</li>
+          </ul>
+      
+          <h3>📅 СРЕДА</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Завершаем накопленные задания Радара</li>
+              <li>Используем ускорения на исследования</li>
+              <li>Тратим Научные данные</li>
+              <li>Открываем сундуки с компонентами бойца</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Радар, ускорения исследований, Научные данные, сундуки бойца → <strong>Готовность к миссии</strong></li>
+              <li>Завершенные исследования (+1 Сила) → <strong>VS Битва</strong></li>
+          </ul>
+      
+          <h3>📅 ЧЕТВЕРГ</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Тратим опыт на прокачку героев (660 опыта)</li>
+              <li>Используем карты найма героев</li>
+              <li>Тратим фрагменты героев (мифические)</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Всё это → <strong>Готовность к миссии</strong></li>
+          </ul>
+      
+          <h3>📅 ПЯТНИЦА</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Завершаем события Радара</li>
+              <li>Используем ускорения на строительство, исследования, тренировку солдат</li>
+              <li>Учим солдат</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Радар, ускорения стройки/исследований/тренировок, обучение солдат → <strong>Готовность к миссии</strong></li>
+              <li>Завершенные постройки (+1 Мощь) и завершенные исследования (+1 Сила) → <strong>VS Битва</strong></li>
+          </ul>
+      
+          <h3>📅 СУББОТА</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Учим солдат</li>
+              <li>Используем ускорения на строительство, исследования, тренировки, лечение</li>
+              <li>Убиваем солдат противника (PvP)</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Обучение солдат, ускорения стройки/исследований → <strong>Готовность к миссии</strong></li>
+              <li>Ускорения тренировок, ускорения лечения, убийства врагов → <strong>VS Битва</strong></li>
+          </ul>
+      
+          <h3>📅 ВОСКРЕСЕНЬЕ (подготовка)</h3>
+          <p><strong>Что делаем:</strong></p>
+          <ul>
+              <li>Копим задания Радара (не тратим! оставляем на понедельник)</li>
+              <li>Отправляем отряды на сбор ресурсов на всю ночь</li>
+          </ul>
+          <p><strong>Куда идут очки:</strong></p>
+          <ul>
+              <li>Накопленный Радар → очки пойдут в <strong>Готовность к миссии</strong> в понедельник</li>
+              <li>Сбор ресурсов → <strong>VS Битва</strong></li>
+          </ul>
+      
+          <h3>📋 КОРОТКАЯ ТАБЛИЦА (для быстрой сверки)</h3>
+          <div class="table-wrapper">
+              <table class="collab-table">
+                  <thead>
+                      <tr>
+                          <th>День</th>
+                          <th>Что делаем</th>
+                          <th>Куда идут очки</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>ПН</td><td> Боец(15:00), опыт героев (19:00) </td><td>Готовность к миссии</td></tr>
+                      <tr><td>ПН</td><td> Радар, боец(15:00), улучшение героя(19:00), выносливость</td><td>VS Битва</td></tr>
+                      <tr><td>ВТ</td><td> Оранжевая миссия, легендарный грузовик, ускорение постройки(19:00) </td><td>VS Битва</td></tr>
+                      <tr><td>ВТ</td><td> База(19:00) </td><td>Готовность к миссии </td></tr>
+                      <tr><td>СР</td><td> Ускорения исследований(07:00), боец(11:00)</td><td>Готовность к миссии</td></tr>
+                      <tr><td>СР</td><td> Радар, Завершенные исследования(07:00) (+1 Сила), Научные данные, сундуки бойца(11:00)</td><td>VS Битва</td></tr>
+                      <tr><td>ЧТ</td><td> Опыт героев, карты найма, фрагменты героев(11:00)</td><td>Готовность к миссии и VS Битва </td></tr>
+                      <tr><td>ПТ</td><td> Ускорения стройки(07:00)/исследований(15:00)/тренировок(11:00), обучение солдат(11:00)</td><td>Готовность к миссии</td></tr>
+                      <tr><td>ПТ</td><td> Радар, ускорения стройки(07:00), обучение солдат(11:00) и исследования(15:00) (+1 Мощь/+1 Сила)</td><td>VS Битва</td></tr>
+                      <tr><td>СБ</td><td> Обучение солдат(15:00) </td><td>Готовность к миссии</td></tr>
+                      <tr><td>СБ</td><td> Ускорения тренировок(15:00)/лечения, убийства врагов</td><td>VS Битва</td></tr>
+                      <tr><td>ВС</td><td> Копим Радар</td><td>Готовность к миссии (завтра)</td></tr>
+                      <tr><td>ВС</td><td> Сбор ресурсов</td><td>VS Битва</td></tr>
+                  </tbody>
+              </table>
+          </div>
+      
+          <div class="info-box">
+              <div class="info-icon">✅</div>
+              <div class="info-content">
+                  <strong>ГЛАВНОЕ ПРАВИЛО (запомни):</strong><br>
+                  Не трать ресурсы просто так в любой день. Жди нужный день (смотри таблицу выше), и тогда твои действия принесут очки сразу в два ивента — и в VS Битву, и в Готовность к миссии. Так ты получишь в два раза больше наград за те же самые ресурсы.
+              </div>
+          </div>
+      
+          <div class="info-box ps-note">
+              <div class="info-icon">❓</div>
+              <div class="info-content">
+                  <strong>Если все равно непонятно:</strong> Ты делаешь одно действие (например, открываешь сундук с компонентами бойца). И в этот момент тебе капают очки в левый сундук (Готовность к миссии) и в правый сундук (VS Битва). Два ивента — две награды — за одно действие.
+              </div>
+          </div>
+      
+          <div class="time-reminder">
+              <span class="reminder-icon">📌</span>
+              <strong>Радар:</strong> копим за день до события, не используем по кд.<br>
+              <strong>📌 Терпение — залог быстрого прогресса!</strong>
+          </div>
+      </section>
 
         <section class="content-section">
             <div class="section-number">05</div>
@@ -436,8 +657,6 @@
                     <li>Не игнорировать лечение.</li>
                 </ul>
             </div>
-
-            
         </section>
 
         <section class="content-section">
@@ -535,11 +754,12 @@
         </footer>
     </div>
 
+    <!-- Скрипты: частицы + навигация + часы/игрок -->
     <script>
+        // Частицы (эталон)
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 50;
-            
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -549,6 +769,43 @@
                 particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
                 particlesContainer.appendChild(particle);
             }
+
+            // Часы и игрок (из нового)
+            const clockEl = document.getElementById('msk-clock');
+            const playerEl = document.getElementById('nav-player-info');
+            const getMoscowDate = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Moscow' });
+            
+            const updateClock = () => {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('ru-RU', { 
+                    timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit' 
+                });
+                if (clockEl) clockEl.textContent = `🕒 ${timeStr}`;
+            };
+
+            const loadTodayPlayer = async () => {
+                const today = getMoscowDate();
+                try {
+                    const response = await fetch('harddata/schedule.json');
+                    if (!response.ok) throw new Error('Нет доступа');
+                    const data = await response.json();
+                    const entry = data.find(item => item.date === today);
+                    if (playerEl) {
+                        if (entry) {
+                            playerEl.innerHTML = `👤 Дежурный: <span>${entry.player}</span>`;
+                        } else {
+                            playerEl.textContent = '📅 Сегодня нет смены';
+                        }
+                    }
+                } catch (err) {
+                    if (playerEl) playerEl.textContent = '⚠️ Ошибка';
+                    console.error('Schedule error:', err);
+                }
+            };
+
+            updateClock();
+            setInterval(updateClock, 1000);
+            loadTodayPlayer();
         });
     </script>
 </body>

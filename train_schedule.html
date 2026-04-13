@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание Поездов | GAV — Апрель 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Навигация (единая) -->
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html">📚 Руководство</a>
+            <a href="train_schedule.html" class="active">🚂 Расписание</a>
+        </div>
+        <div class="nav-widget">
+            <div id="msk-clock" class="nav-clock">⏳ --:--</div>
+            <div id="nav-player-info" class="nav-player">🔍 Загрузка...</div>
+        </div>
+    </nav>
+
+    <div class="document-container">
+        <header class="main-header">
+            <div class="header-glow"></div>
+            <div class="alliance-badge">
+                <span class="badge-text">GAV</span>
+            </div>
+            <h1 class="main-title">
+                <span class="title-line">РАСПИСАНИЕ ПОЕЗДОВ</span>
+                <span class="title-accent">АПРЕЛЬ 2026</span>
+            </h1>
+            <div class="version-tag">
+                <span class="version-label">ЗАГРУЗКА</span>
+                <span class="version-number">8:00 ±</span>
+            </div>
+        </header>
+
+        <section class="schedule-section">
+            <div class="section-number" style="color:rgba(255,215,0,0.08);text-shadow:0 0 30px rgba(255,215,0,0.2)">🚂</div>
+            <h2>⏰ ПРАВИЛА ЗАГРУЗКИ</h2>
+            
+            <div class="schedule-rules">
+                <div class="rule-item">
+                    <span class="icon">⏰</span>
+                    <span class="label">Время</span>
+                    <span class="value">8:00 ±</span>
+                </div>
+                <div class="rule-item">
+                    <span class="icon">📅</span>
+                    <span class="label">Проверка</span>
+                    <span class="value">Своё число</span>
+                </div>
+                <div class="rule-item">
+                    <span class="icon">🎒</span>
+                    <span class="label">Груз</span>
+                    <span class="value">Ресурсы</span>
+                </div>
+                <div class="rule-item">
+                    <span class="icon">⚠️</span>
+                    <span class="label">Важно</span>
+                    <span class="value">Не можешь — предупреди</span>
+                </div>
+            </div>
+
+            <div id="schedule-container" class="schedule-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Загрузка расписания...</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-signature">
+                    <span class="signature-heart">💙</span>
+                    <p>АЛЬЯНС <strong>GAV</strong></p>
+                </div>
+            </div>
+            <div class="footer-decoration"></div>
+        </footer>
+    </div>
+
+    <script>
+        // Частицы
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random()*100+'%';
+                p.style.top = Math.random()*100+'%';
+                p.style.animationDelay = Math.random()*5+'s';
+                p.style.animationDuration = (Math.random()*10+5)+'s';
+                particlesContainer.appendChild(p);
+            }
+
+            // Часы + игрок (общий код)
+            const clockEl = document.getElementById('msk-clock');
+            const playerEl = document.getElementById('nav-player-info');
+            const getMoscowDate = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Moscow' });
+            
+            const updateClock = () => {
+                const now = new Date();
+                const t = now.toLocaleTimeString('ru-RU', { timeZone:'Europe/Moscow', hour:'2-digit', minute:'2-digit' });
+                if (clockEl) clockEl.textContent = `🕒 ${t}`;
+            };
+            const loadPlayer = async () => {
+                const today = getMoscowDate();
+                try {
+                    const r = await fetch('harddata/schedule.json');
+                    if (!r.ok) throw new Error();
+                    const d = await r.json();
+                    const e = d.find(x => x.date === today);
+                    if (playerEl) playerEl.innerHTML = e ? `👤 Дежурный: <span>${e.player}</span>` : '📅 Нет смены';
+                } catch { if (playerEl) playerEl.textContent = '⚠️ Ошибка'; }
+            };
+            updateClock(); setInterval(updateClock,1000); loadPlayer();
+
+            // Загрузка расписания
+            const container = document.getElementById('schedule-container');
+            const daysRu = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+            
+            const loadSchedule = async () => {
+                try {
+                    const res = await fetch('harddata/schedule.json');
+                    if (!res.ok) throw new Error();
+                    const data = await res.json();
+                    container.innerHTML = '';
+                    const today = getMoscowDate();
+                    
+                    data.forEach(entry => {
+                        const d = new Date(entry.date);
+                        if (isNaN(d)) return;
+                        const isToday = entry.date === today;
+                        const item = document.createElement('div');
+                        item.className = `schedule-item${isToday?' today':''}`;
+                        item.innerHTML = `
+                            <span class="schedule-date">${d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'})} (${daysRu[d.getDay()]})</span>
+                            <span class="schedule-player">
+                                ${entry.player}
+                                ${isToday?'<span class="schedule-badge">СЕГОДНЯ</span>':''}
+                            </span>
+                        `;
+                        container.appendChild(item);
+                    });
+                } catch (err) {
+                    container.innerHTML = `<div class="info-box" style="border-left-color:var(--accent-red);background:rgba(255,56,96,0.1)">
+                        <div class="info-icon">⚠️</div>
+                        <div class="info-content">Ошибка загрузки. Откройте через локальный сервер (Live Server).</div>
+                    </div>`;
+                }
+            };
+            loadSchedule();
+        });
+    </script>
+</body>
+</html>

@@ -106,7 +106,7 @@
             const updateClock = () => {
                 const now = new Date();
                 const t = now.toLocaleTimeString('ru-RU', { timeZone:'Europe/Moscow', hour:'2-digit', minute:'2-digit' });
-                if (clockEl) clockEl.textContent = `🕒 ${t}`;
+                if (clockEl) clockEl.textContent = `🕒 МСК : ${t}`;
             };
             const loadPlayer = async () => {
                 const today = getMoscowDate();

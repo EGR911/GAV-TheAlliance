@@ -675,7 +675,73 @@ body {
   .slogan-alliance { font-size: 48px; }
   .schedule-rules { grid-template-columns: repeat(2, 1fr); }
 }
+/* Расписание по месяцам */
+.schedule-months {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
 
+.schedule-month {
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(0,212,255,0.2);
+}
+
+.month-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: var(--accent-gold);
+  text-align: center;
+  margin: 0 0 20px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255,215,0,0.3);
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(255,215,0,0.3);
+}
+
+.schedule-month .schedule-list {
+  margin: 0;
+}
+
+.schedule-month .schedule-item {
+  margin-bottom: 8px;
+}
+
+/* Адаптив для месяцев */
+@media (max-width: 900px) {
+  .schedule-months {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .month-title {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  .schedule-month {
+    padding: 20px 15px;
+  }
+}
+
+@media print {
+  .schedule-months {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .schedule-month {
+    border: 1px solid #999;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+  .month-title {
+    color: #000;
+    border-bottom-color: #999;
+  }
+}
 @media (max-width: 480px) {
   .main-title { font-size: 28px; }
   .content-section h2 { font-size: 24px; }

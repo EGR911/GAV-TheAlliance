@@ -215,7 +215,7 @@
             const clockEl=document.getElementById('msk-clock'), playerEl=document.getElementById('nav-player-info');
             const getMoscowDate=()=>new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Moscow'});
             const updateClock=()=>{if(clockEl) clockEl.textContent=`🕒 ${new Date().toLocaleTimeString('ru-RU',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit'})}`};
-            const loadPlayer=async()=>{try{const r=await fetch('schedule.json'); if(!r.ok)throw new Error(); const d=await r.json(); const e=d.find(x=>x.date===getMoscowDate()); if(playerEl) playerEl.innerHTML=e?`👤 Дежурный: <span>${e.player}</span>`:'📅 Нет смены';}catch{if(playerEl) playerEl.textContent='⚠️ Ошибка';}};
+            const loadPlayer=async()=>{try{const r=await fetch('harddata/schedule.json'); if(!r.ok)throw new Error(); const d=await r.json(); const e=d.find(x=>x.date===getMoscowDate()); if(playerEl) playerEl.innerHTML=e?`👤 Дежурный: <span>${e.player}</span>`:'📅 Нет смены';}catch{if(playerEl) playerEl.textContent='⚠️ Ошибка';}};
             updateClock(); setInterval(updateClock,1000); loadPlayer();
         });
     </script>

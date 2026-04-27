@@ -1,0 +1,299 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Промокоды | GAV — Призы и Награды</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Карусель */
+        .carousel-container {
+            position: relative; margin: 30px 0; border-radius: 20px; overflow: hidden;
+            border: 2px solid rgba(0, 212, 255, 0.3); box-shadow: var(--shadow-card);
+            background: rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .carousel-track {
+            display: flex; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+        }
+        .carousel-slide { 
+            min-width: 100%; position: relative; 
+            display: flex; justify-content: center; align-items: center;
+            line-height: 0;
+        }
+        /* ГЛАВНОЕ ИЗМЕНЕНИЕ ЗДЕСЬ */
+        .carousel-image { 
+            width: auto; /* Не растягиваем принудительно на всю ширину */
+            max-width: 100%; /* Но не даем вылезти за пределы экрана */
+            height: auto; 
+            max-height: 70vh; /* Ограничиваем высоту (70% от экрана) для удобства */
+            object-fit: contain; /* Показываем картинку целиком, без обрезки */
+            display: block; 
+        }
+        
+        .carousel-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            color: #fff; padding: 35px 20px 15px; font-family: 'Orbitron', sans-serif;
+            font-size: 18px; font-weight: 600; text-align: center; letter-spacing: 2px;
+            line-height: 1.4; pointer-events: none;
+        }
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 212, 255, 0.85); border: none; color: #000;
+            width: 50px; height: 50px; border-radius: 50%; font-size: 24px;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center;
+            justify-content: center; z-index: 10; backdrop-filter: blur(5px);
+        }
+        .carousel-btn:hover { background: var(--accent-cyan); transform: translateY(-50%) scale(1.1); }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
+        .carousel-dots {
+            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 10px; z-index: 10;
+        }
+        .carousel-dot {
+            width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .carousel-dot.active {
+            background: var(--accent-gold); width: 35px; border-radius: 6px;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        /* Промокоды */
+        .promo-grid {
+            display: flex; flex-wrap: wrap; gap: 15px; margin: 30px 0; justify-content: center;
+        }
+        .promo-item {
+            flex: 1 1 calc(50% - 15px); max-width: 400px;
+            background: rgba(255, 215, 0, 0.08); border: 2px dashed var(--accent-gold);
+            color: var(--accent-gold); font-family: 'Orbitron', monospace;
+            font-size: 22px; font-weight: 900; padding: 18px; border-radius: 14px;
+            cursor: pointer; transition: all 0.3s; text-align: center; user-select: none;
+        }
+        .promo-item:hover {
+            background: var(--accent-gold); color: #000; transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.25);
+        }
+        .promo-item:active { transform: scale(0.97); }
+
+        @media (max-width: 768px) {
+            .carousel-caption { font-size: 15px; padding: 25px 15px 10px; }
+            .carousel-btn { width: 40px; height: 40px; font-size: 18px; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
+            .promo-item { font-size: 18px; padding: 15px; flex: 1 1 100%; }
+            .carousel-image { max-height: 60vh; } /* На мобильных чуть меньше */
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html">📚 Руководство</a>
+            <a href="train_schedule.html">🚂 Расписание</a>
+            <a href="promocodes.html"class="active">🎁 Промокоды</a>
+            <a href="pandora.html" >⚔️ Пандора</a>
+        </div>
+        <div class="nav-widget">
+            <div id="msk-clock" class="nav-clock">⏳ --:--</div>
+            <div id="nav-player-info" class="nav-player">🔍 Загрузка...</div>
+        </div>
+    </nav>
+
+    <div class="print-btn-container">
+        <button onclick="window.print()" class="glow-btn">
+            <span class="btn-icon">📥</span>
+            <span>СОХРАНИТЬ PDF</span>
+        </button>
+    </div>
+
+    <div class="document-container">
+        <header class="main-header">
+            <div class="header-glow"></div>
+            <div class="alliance-badge"><span class="badge-text">GAV</span></div>
+            <h1 class="main-title">
+                <span class="title-line">ПРОМОКОДЫ</span>
+                <span class="title-accent">ПРИЗЫ И НАГРАДЫ</span>
+            </h1>
+            <div class="version-tag">
+                <span class="version-label">АКТУАЛЬНО</span>
+                <span class="version-number">2026</span>
+            </div>
+        </header>
+
+        <!-- ИНСТРУКЦИЯ + КАРУСЕЛЬ -->
+        <section class="content-section">
+            <div class="section-number">📱</div>
+            <h2>🔑 КАК АКТИВИРОВАТЬ</h2>
+            
+            <div class="golden-rule-box">
+                <span class="rule-emoji">💎</span>
+                <div class="rule-content">
+                    <strong>Промокоды дают ценные призы:</strong> алмазы, ресурсы, ускорители и другие бонусы.<br>
+                    Вводите их сразу — коды часто имеют лимит активаций!
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <img src="images/promo1.jpg" alt="Шаг 1" class="carousel-image">
+                        <div class="carousel-caption">Шаг 1: Откройте игру и нажмите на аватар</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/promo2.jpg" alt="Шаг 2" class="carousel-image">
+                        <div class="carousel-caption">Шаг 2: Перейдите в раздел "Настройки"</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/promo3.jpg" alt="Шаг 3" class="carousel-image">
+                        <div class="carousel-caption">Шаг 3: Найдите кнопку "Промокод"</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/promo4.jpg" alt="Шаг 4" class="carousel-image">
+                        <div class="carousel-caption">Шаг 4: Вставьте код и заберите награду</div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" id="prevBtn">❮</button>
+                <button class="carousel-btn next" id="nextBtn">❯</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+            <!-- Текст "Управление каруселью" удален -->
+        </section>
+
+        <!-- ПРОМОКОДЫ -->
+        <section class="content-section">
+            <div class="section-number">🎟️</div>
+            <h2>✨ АКТИВНЫЕ КОДЫ</h2>
+            <p style="text-align:center; color:var(--text-secondary); margin-bottom:25px;">
+                Нажми на код → он скопируется в буфер → вставь в игре (Ctrl+V)
+            </p>
+
+            <div class="info-box ps-note">
+                <div class="info-icon">💬</div>
+                <div class="info-content">
+                    <strong>Нашёл новый промокод?</strong> Сразу скидывай его в чат альянса!<br>
+                    У кодов часто есть срок действия или лимит вводов. Чем быстрее поделишься — тем больше наших успеет забрать награду.
+                </div>
+            </div>
+            
+            <div class="promo-grid">
+                <div class="promo-item" onclick="copyCode(this)">DC8KYHJ</div>
+                <div class="promo-item" onclick="copyCode(this)">VK15KOKL</div>
+                <div class="promo-item" onclick="copyCode(this)">ZRR6666</div>
+                <div class="promo-item" onclick="copyCode(this)">ZRR999</div>
+                <div class="promo-item" onclick="copyCode(this)">ZRR2026</div>
+                <div class="promo-item" onclick="copyCode(this)">DC6KFEO</div>
+                <div class="promo-item" onclick="copyCode(this)">VK12KDGH</div>
+                <div class="promo-item" onclick="copyCode(this)">VK10KYUT</div>
+                <div class="promo-item" onclick="copyCode(this)">VK20KDSM</div>
+                <div class="promo-item" onclick="copyCode(this)">VK25KYYH</div>
+                <div class="promo-item" onclick="copyCode(this)">VK30KBCV</div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-signature">
+                    <span class="signature-heart">💙</span>
+                    <p>АЛЬЯНС <strong>GAV</strong></p>
+                </div>
+                <div class="footer-slogan">
+                    <span class="slogan-text">ДЕЛИТЕСЬ КОДАМИ И ПОБЕЖДАЙТЕ ВМЕСТЕ</span>
+                </div>
+            </div>
+            <div class="footer-decoration"></div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Частицы
+            const pCont = document.getElementById('particles');
+            for(let i=0; i<50; i++){
+                const p = document.createElement('div');
+                p.className='particle';
+                p.style.left=Math.random()*100+'%'; p.style.top=Math.random()*100+'%';
+                p.style.animationDelay=Math.random()*5+'s';
+                p.style.animationDuration=(Math.random()*10+5)+'s';
+                pCont.appendChild(p);
+            }
+
+            // Часы + Игрок
+            const clockEl = document.getElementById('msk-clock');
+            const playerEl = document.getElementById('nav-player-info');
+            const getMoscowDate = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Moscow' });
+            const updateClock = () => {
+                const now = new Date();
+                const t = now.toLocaleTimeString('ru-RU', { timeZone:'Europe/Moscow', hour:'2-digit', minute:'2-digit' });
+                if(clockEl) clockEl.textContent = `🕒 ${t}`;
+            };
+            const loadPlayer = async () => {
+                try {
+                    const r = await fetch('harddata/schedule.json');
+                    if(!r.ok) throw new Error();
+                    const d = await r.json();
+                    const e = d.find(x => x.date === getMoscowDate());
+                    if(playerEl) playerEl.innerHTML = e ? `👤 Дежурный: <span>${e.player}</span>` : '📅 Нет смены';
+                } catch { if(playerEl) playerEl.textContent = '⚠️ Ошибка'; }
+            };
+            updateClock(); setInterval(updateClock, 1000); loadPlayer();
+
+            // Карусель
+            const track = document.getElementById('carouselTrack');
+            const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+            const dotsContainer = document.getElementById('carouselDots');
+            let current = 0, auto;
+
+            if(slides.length > 0) {
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'carousel-dot' + (i===0 ? ' active' : '');
+                    dot.onclick = () => goTo(i);
+                    dotsContainer.appendChild(dot);
+                });
+
+                const update = () => {
+                    track.style.transform = `translateX(-${current*100}%)`;
+                    dotsContainer.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===current));
+                };
+                const move = dir => { current += dir; if(current<0) current=slides.length-1; if(current>=slides.length) current=0; update(); resetAuto(); };
+                const goTo = i => { current=i; update(); resetAuto(); };
+                const resetAuto = () => { clearInterval(auto); auto = setInterval(()=>move(1), 5000); };
+                
+                document.getElementById('prevBtn').onclick = () => move(-1);
+                document.getElementById('nextBtn').onclick = () => move(1);
+                resetAuto();
+
+                let sx=0;
+                track.addEventListener('touchstart', e=>sx=e.touches[0].clientX);
+                track.addEventListener('touchend', e=>{
+                    const diff=sx-e.changedTouches[0].clientX;
+                    if(diff>50) move(1); else if(diff<-50) move(-1);
+                });
+            }
+        });
+
+        // Копирование промокода
+        function copyCode(el) {
+            const txt = el.textContent;
+            navigator.clipboard.writeText(txt).then(() => {
+                const orig = el.textContent;
+                el.textContent = '✓ СКОПИРОВАНО';
+                el.style.background = 'var(--accent-green)';
+                el.style.borderColor = 'var(--accent-green)';
+                el.style.color = '#000';
+                setTimeout(() => {
+                    el.textContent = orig;
+                    el.style.background = ''; el.style.borderColor = ''; el.style.color = '';
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>

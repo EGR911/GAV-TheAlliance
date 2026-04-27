@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,35 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .pandora-form{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:30px;background:rgba(0,0,0,0.3);padding:20px;border-radius:15px;border:1px solid var(--border-glow)}.pandora-form input{flex:1;min-width:200px;padding:12px 15px;background:rgba(255,255,255,0.05);border:1px solid var(--accent-blue);border-radius:8px;color:var(--text-primary);font-family:'Rajdhani',sans-serif;font-size:16px;outline:none}.pandora-form input:focus{border-color:var(--accent-cyan);box-shadow:0 0 15px var(--border-glow)}.pandora-form button{padding:12px 25px;background:var(--gradient-main);border:none;border-radius:8px;color:#000;font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;transition:0.3s}.pandora-form button:hover{transform:translateY(-2px);box-shadow:0 5px 20px var(--shadow-glow)}.player-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:20px;max-height:250px;overflow-y:auto;padding:5px}.player-card{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);padding:10px 15px;border-radius:8px;border-left:3px solid var(--accent-cyan)}.player-card .remove-btn{background:none;border:none;color:var(--accent-red);font-size:18px;cursor:pointer}.teams-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:30px}.team-card{background:var(--card-bg);border-radius:20px;padding:25px;border:2px solid var(--accent-blue)}.team-card h3{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--accent-cyan);margin:0 0 15px 0;padding-bottom:10px;border-bottom:1px solid var(--border-glow)}.sub-group{margin-bottom:12px;padding:10px;background:rgba(0,0,0,0.2);border-radius:8px}.sub-group-title{font-size:13px;color:var(--accent-gold);margin-bottom:5px;font-weight:700;text-transform:uppercase}.sub-group ul{list-style:none;padding:0;margin:0}.sub-group li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}.sub-group li:last-child{border:none}.power{color:var(--accent-gold);font-weight:700;margin-left:10px}.fixed-tag{color:var(--accent-red);font-size:10px;margin-left:5px;background:rgba(255,56,96,0.2);padding:2px 4px;border-radius:4px}.loading{text-align:center;color:var(--text-muted);padding:20px}.copy-btn{width:100%;margin-top:20px;background:var(--gradient-gold);color:#000;font-family:'Orbitron',sans-serif;font-weight:700;padding:15px;border:none;border-radius:12px;cursor:pointer;transition:0.3s}.copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,215,0,0.4)}@media(max-width:768px){.pandora-form{flex-direction:column}.teams-grid{grid-template-columns:1fr}}
+        .pandora-form{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:30px;background:rgba(0,0,0,0.3);padding:20px;border-radius:15px;border:1px solid var(--border-glow)}
+        .pandora-form input,.pandora-form select{flex:1;min-width:180px;padding:12px 15px;background:rgba(255,255,255,0.05);border:1px solid var(--accent-blue);border-radius:8px;color:var(--text-primary);font-family:'Rajdhani',sans-serif;font-size:16px;outline:none}
+        .pandora-form select option{background:var(--primary-dark);color:var(--text-primary)}
+        .pandora-form input:focus,.pandora-form select:focus{border-color:var(--accent-cyan);box-shadow:0 0 15px var(--border-glow)}
+        .pandora-form button{padding:12px 25px;background:var(--gradient-main);border:none;border-radius:8px;color:#000;font-family:'Orbitron',sans-serif;font-weight:700;cursor:pointer;transition:0.3s}
+        .pandora-form button:hover{transform:translateY(-2px);box-shadow:0 5px 20px var(--shadow-glow)}
+        
+        .time-toggle{display:flex;gap:15px;margin:20px 0}
+        .time-btn{flex:1;padding:12px;background:rgba(0,0,0,0.3);border:2px solid var(--accent-blue);color:var(--accent-cyan);border-radius:10px;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:600;transition:0.3s}
+        .time-btn.active{background:var(--accent-blue);color:#000;border-color:var(--accent-blue)}
+        
+        .player-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:20px;max-height:250px;overflow-y:auto;padding:5px}
+        .player-card{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);padding:10px 15px;border-radius:8px;border-left:3px solid var(--accent-cyan)}
+        .player-card .remove-btn{background:none;border:none;color:var(--accent-red);font-size:18px;cursor:pointer}
+        
+        .teams-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:30px}
+        .team-card{background:var(--card-bg);border-radius:20px;padding:25px;border:2px solid var(--accent-blue)}
+        .team-card h3{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--accent-cyan);margin:0 0 15px 0;padding-bottom:10px;border-bottom:1px solid var(--border-glow)}
+        .sub-group{margin-bottom:12px;padding:10px;background:rgba(0,0,0,0.2);border-radius:8px}
+        .sub-group-title{font-size:13px;color:var(--accent-gold);margin-bottom:5px;font-weight:700;text-transform:uppercase}
+        .sub-group ul{list-style:none;padding:0;margin:0}
+        .sub-group li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}
+        .sub-group li:last-child{border:none}
+        .power{color:var(--accent-gold);font-weight:700;margin-left:10px}
+        .fixed-tag{color:var(--accent-red);font-size:10px;margin-left:5px;background:rgba(255,56,96,0.2);padding:2px 4px;border-radius:4px}
+        .loading{text-align:center;color:var(--text-muted);padding:20px}
+        .copy-btn{width:100%;margin-top:20px;background:var(--gradient-gold);color:#000;font-family:'Orbitron',sans-serif;font-weight:700;padding:15px;border:none;border-radius:12px;cursor:pointer;transition:0.3s}
+        .copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,215,0,0.4)}
+        @media(max-width:768px){.pandora-form{flex-direction:column}.teams-grid{grid-template-columns:1fr}.time-toggle{flex-direction:column}}
     </style>
 </head>
 <body>
@@ -30,19 +58,31 @@
             <div class="header-glow"></div>
             <div class="alliance-badge"><span class="badge-text">GAV</span></div>
             <h1 class="main-title"><span class="title-line">БИТВА ПАНДОРЫ</span><span class="title-accent">ОНЛАЙН-РЕГИСТРАЦИЯ</span></h1>
-            <div class="version-tag"><span class="version-label">LIVE</span><span class="version-number">v4.0</span></div>
+            <div class="version-tag"><span class="version-label">TIME SLOTS</span><span class="version-number">v5.0</span></div>
         </header>
         <section class="content-section">
             <div class="section-number">🌍</div>
             <h2>📝 ЗАРЕГИСТРИРОВАТЬСЯ В БОЙ</h2>
-            <p style="color:var(--text-secondary);margin-bottom:20px">Введи ник и силу. Данные сохраняются в облаке и видны всем участникам альянса.</p>
+            <p style="color:var(--text-secondary);margin-bottom:20px">Введи ник, силу и выбери удобное время. Команды формируются отдельно для каждого слота.</p>
             <form id="pandoraForm" class="pandora-form">
                 <input type="text" id="nickInput" placeholder="Ник игрока" required autocomplete="off">
                 <input type="number" id="powerInput" placeholder="Сила базы (0-60)" min="0" max="60" required>
+                <select id="timeInput" required>
+                    <option value="" disabled selected>⏰ Время ивента</option>
+                    <option value="14:00">⏰ 14:00 (День)</option>
+                    <option value="23:00">🌙 23:00 (Ночь)</option>
+                </select>
                 <button type="submit" id="regBtn">✅ ЗАРЕГИСТРИРОВАТЬСЯ</button>
             </form>
-            <h3 style="color:var(--accent-cyan);margin-bottom:15px">👥 В бою: <span id="countPlayers">0</span></h3>
+
+            <div class="time-toggle">
+                <button id="btn14" class="time-btn active">⏰ КОМАНДЫ 14:00</button>
+                <button id="btn23" class="time-btn">🌙 КОМАНДЫ 23:00</button>
+            </div>
+
+            <h3 style="color:var(--accent-cyan);margin-bottom:15px">👥 Записались на <span id="activeTimeLabel">14:00</span>: <span id="countPlayers">0</span></h3>
             <div id="playerList" class="player-list"><div class="loading">Загрузка списка...</div></div>
+            
             <button id="generateBtn" class="glow-btn" style="width:100%;margin-top:20px;background:var(--gradient-red)">🎲 РАСПРЕДЕЛИТЬ КОМАНДЫ</button>
             <button id="copyBtn" class="copy-btn" style="display:none">📋 СКОПИРОВАТЬ ИТОГ В ЧАТ</button>
             <div id="results" class="teams-grid"></div>
@@ -59,10 +99,8 @@
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-        // 🔽 ТВОИ КЛЮЧИ (уже вставлены) 🔽
         const SUPABASE_URL = 'https://vhuoxmzgbmdhecepzplf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZodW94bXpnYm1kaGVjZXB6cGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyODgzMjgsImV4cCI6MjA5Mjg2NDMyOH0.zK_57xhvCLTRZe-sEWMbeoHHtx51D0yGWC_4p7Mu45s';
-        // 🔼 КОНЕЦ 🔼
 
         const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
         const TABLE = 'players';
@@ -70,18 +108,19 @@
         const form = document.getElementById('pandoraForm');
         const listEl = document.getElementById('playerList');
         const countEl = document.getElementById('countPlayers');
+        const timeLabel = document.getElementById('activeTimeLabel');
         const resultsEl = document.getElementById('results');
         const copyBtn = document.getElementById('copyBtn');
+        
         let currentPlayers = [];
+        let activeTime = '14:00';
 
         async function loadData() {
             listEl.innerHTML = '<div class="loading">Синхронизация...</div>';
             const { data, error } = await supabase.from(TABLE).select('*').order('created_at', { ascending: true });
             if (error) { console.error(error); listEl.innerHTML = '<p style="color:var(--accent-red)">Ошибка подключения. Проверь ключи.</p>'; return; }
             currentPlayers = data || [];
-            countEl.textContent = currentPlayers.length;
-            renderList();
-            if(currentPlayers.length >= 2) assignAndRender();
+            updateView();
         }
         loadData();
 
@@ -92,60 +131,44 @@
             const btn = document.getElementById('regBtn');
             const name = document.getElementById('nickInput').value.trim();
             const power = parseInt(document.getElementById('powerInput').value);
+            const time = document.getElementById('timeInput').value;
             
-            if (!name || isNaN(power) || power < 0) return alert('Проверь данные!');
-            if (currentPlayers.some(p => p.name.toLowerCase() === name.toLowerCase())) return alert('Этот ник уже в списке!');
+            if (!name || isNaN(power) || power < 0 || !time) return alert('Заполни все поля!');
+            if (currentPlayers.some(p => p.name.toLowerCase() === name.toLowerCase() && p.time_slot === time)) return alert('Этот ник уже записан на это время!');
 
             btn.disabled = true; btn.textContent = '⏳ Запись...';
-            const { error } = await supabase.from(TABLE).insert({ name, power });
+            const { error } = await supabase.from(TABLE).insert({ name, power, time_slot: time });
             btn.disabled = false; btn.textContent = '✅ ЗАРЕГИСТРИРОВАТЬСЯ';
             
             if (error) return alert('Ошибка записи: ' + error.message);
             form.reset();
         });
 
-        window.removePlayer = async (id) => {
-            if(!confirm('Удалить игрока?')) return;
-            await supabase.from(TABLE).delete().eq('id', id);
-        };
+        window.removePlayer = async (id) => { if(!confirm('Удалить игрока?')) return; await supabase.from(TABLE).delete().eq('id', id); };
 
-        function renderList() {
-            if (!currentPlayers.length) {
-                listEl.innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1;text-align:center">Пока никого нет. Будь первым!</p>';
-                return;
+        function updateView() {
+            const playersForTime = currentPlayers.filter(p => p.time_slot === activeTime);
+            countEl.textContent = playersForTime.length;
+            timeLabel.textContent = activeTime;
+            
+            if (!playersForTime.length) {
+                listEl.innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1;text-align:center">На это время пока никто не записался.</p>';
+            } else {
+                listEl.innerHTML = playersForTime.map(p => `
+                    <div class="player-card"><span>${p.name} <small style="color:var(--text-muted)">(${p.power})</small></span><button class="remove-btn" onclick="removePlayer('${p.id}')">✖</button></div>
+                `).join('');
             }
-            listEl.innerHTML = currentPlayers.map(p => `
-                <div class="player-card"><span>${p.name} <small style="color:var(--text-muted)">(${p.power})</small></span><button class="remove-btn" onclick="removePlayer('${p.id}')">✖</button></div>
-            `).join('');
+            assignAndRender();
         }
 
         function assignGroups(players) {
             let list = [...players];
             let g = {t1_29:[], t1_26:[], t2_h1:[], t2_h2:[], t2_h3:[], t2_h4:[], t3_stat:[], t3_plant:[], t4_res:[]};
-
-            // 1. Фиксированные ники
             const fixed = {'людочка':'t2_h1', 'darya3010':'t2_h2', 'katy':'t2_h3'};
-            for(const [k,v] of Object.entries(fixed)){
-                const idx = list.findIndex(p => p.name.toLowerCase()===k);
-                if(idx!==-1){const p=list.splice(idx,1)[0]; p.fixed=true; g[v].push(p);}
-            }
-
-            // 2. Команда 1: Наука (26-60)
-            const sci = list.filter(p=>p.power>=26 && p.power<=60);
-            sci.forEach(p=> p.power>=29 ? g.t1_29.push(p) : g.t1_26.push(p));
-            list = list.filter(p=> !(p.power>=26 && p.power<=60));
-
-            // 3. Госпиталь 4 (23-60)
-            const h4 = list.filter(p=>p.power>=23 && p.power<=60);
-            g.t2_h4 = [...h4];
-            list = list.filter(p=> !(p.power>=23 && p.power<=60));
-
-            // 4. Тактика (15-60)
-            const tac = list.filter(p=>p.power>=15 && p.power<=60);
-            tac.forEach((p,i)=> i%2===0 ? g.t3_stat.push(p) : g.t3_plant.push(p));
-            list = list.filter(p=> !(p.power>=15 && p.power<=60));
-
-            // 5. Резерв (остаток)
+            for(const [k,v] of Object.entries(fixed)){ const idx = list.findIndex(p => p.name.toLowerCase()===k); if(idx!==-1){const p=list.splice(idx,1)[0]; p.fixed=true; g[v].push(p);} }
+            const sci = list.filter(p=>p.power>=26 && p.power<=60); sci.forEach(p=> p.power>=29 ? g.t1_29.push(p) : g.t1_26.push(p)); list = list.filter(p=> !(p.power>=26 && p.power<=60));
+            const h4 = list.filter(p=>p.power>=23 && p.power<=60); g.t2_h4 = [...h4]; list = list.filter(p=> !(p.power>=23 && p.power<=60));
+            const tac = list.filter(p=>p.power>=15 && p.power<=60); tac.forEach((p,i)=> i%2===0 ? g.t3_stat.push(p) : g.t3_plant.push(p)); list = list.filter(p=> !(p.power>=15 && p.power<=60));
             g.t4_res = [...list];
             return g;
         }
@@ -155,13 +178,11 @@
             return `<div class="sub-group"><div class="sub-group-title">${title} (${arr.length})</div><ul>${arr.map(p=>`<li><span>${p.name}${p.fixed?'<span class="fixed-tag">ФИКС</span>':''}</span><span class="power">${p.power}</span></li>`).join('')}</ul></div>`;
         }
 
-        function toText(g) {
-            const t=(t,a)=>a.length?`${t}:\n${a.map(p=>`• ${p.name} (${p.power})${p.fixed?' [ФИКС]':''}`).join('\n')}`:'';
-            return `🔬 КОМАНДА 1: НАУКА\n${t('Институт 1 (29-60)',g.t1_29)}\n${t('Институт 2 (26-60)',g.t1_26)}\n\n🏥 КОМАНДА 2: ГОСПИТАЛИ\n${t('Госпиталь 1',g.t2_h1)}\n${t('Госпиталь 2',g.t2_h2)}\n${t('Госпиталь 3',g.t2_h3)}\n${t('Госпиталь 4 (23+)',g.t2_h4)}\n\n📡 КОМАНДА 3: ТАКТИКА\n${t('Станция (15+)',g.t3_stat)}\n${t('Электростанция (15+)',g.t3_plant)}\n\n🛡️ КОМАНДА 4: РЕЗЕРВ\n${t('Нефть и Резерв (0+)',g.t4_res)}`;
-        }
-
         function assignAndRender() {
-            const g = assignGroups(currentPlayers);
+            const playersForTime = currentPlayers.filter(p => p.time_slot === activeTime);
+            if(playersForTime.length < 2) { resultsEl.innerHTML = '<p class="loading">Нужно минимум 2 игрока на этот слот.</p>'; copyBtn.style.display='none'; return; }
+            
+            const g = assignGroups(playersForTime);
             resultsEl.innerHTML = `
                 <div class="team-card"><h3>🔬 КОМАНДА 1: НАУКА</h3>${renderGroup('Институт 1 (29-60)',g.t1_29)}${renderGroup('Институт 2 (26-60)',g.t1_26)}</div>
                 <div class="team-card"><h3>🏥 КОМАНДА 2: ГОСПИТАЛИ</h3>${renderGroup('Госпиталь 1',g.t2_h1)}${renderGroup('Госпиталь 2',g.t2_h2)}${renderGroup('Госпиталь 3',g.t2_h3)}${renderGroup('Госпиталь 4 (23+)',g.t2_h4)}</div>
@@ -170,13 +191,21 @@
             `;
             copyBtn.style.display = 'block';
             copyBtn.onclick = () => {
-                navigator.clipboard.writeText(toText(g));
+                const toText=(t,a)=>a.length?`${t}:\n${a.map(p=>`• ${p.name} (${p.power})${p.fixed?' [ФИКС]':''}`).join('\n')}`:'';
+                const text = `⏰ ИВЕНТ ПАНДОРА — ${activeTime}\n\n🔬 НАУКА\n${toText('Институт 1',g.t1_29)}\n${toText('Институт 2',g.t1_26)}\n\n🏥 ГОСПИТАЛИ\n${toText('Госпиталь 1',g.t2_h1)}\n${toText('Госпиталь 2',g.t2_h2)}\n${toText('Госпиталь 3',g.t2_h3)}\n${toText('Госпиталь 4',g.t2_h4)}\n\n📡 ТАКТИКА\n${toText('Станция',g.t3_stat)}\n${toText('Электростанция',g.t3_plant)}\n\n🛡️ РЕЗЕРВ\n${toText('Нефть и Резерв',g.t4_res)}`;
+                navigator.clipboard.writeText(text);
                 copyBtn.textContent = '✓ СКОПИРОВАНО! ОТПРАВЛЯЙ В ЧАТ';
                 setTimeout(()=>copyBtn.textContent='📋 СКОПИРОВАТЬ ИТОГ В ЧАТ', 2000);
             };
         }
 
-        document.getElementById('generateBtn').addEventListener('click', assignAndRender);
+        // Переключатели времени
+        document.getElementById('btn14').onclick = () => { activeTime='14:00'; setActiveBtn(); updateView(); };
+        document.getElementById('btn23').onclick = () => { activeTime='23:00'; setActiveBtn(); updateView(); };
+        function setActiveBtn() {
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(activeTime==='14:00'?'btn14':'btn23').classList.add('active');
+        }
     </script>
 
     <script>
@@ -186,7 +215,7 @@
             const clockEl=document.getElementById('msk-clock'), playerEl=document.getElementById('nav-player-info');
             const getMoscowDate=()=>new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Moscow'});
             const updateClock=()=>{if(clockEl) clockEl.textContent=`🕒 ${new Date().toLocaleTimeString('ru-RU',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit'})}`};
-            const loadPlayer=async()=>{try{const r=await fetch('harddata/schedule.json'); if(!r.ok)throw new Error(); const d=await r.json(); const e=d.find(x=>x.date===getMoscowDate()); if(playerEl) playerEl.innerHTML=e?`👤 Дежурный: <span>${e.player}</span>`:'📅 Нет смены';}catch{if(playerEl) playerEl.textContent='⚠️ Ошибка';}};
+            const loadPlayer=async()=>{try{const r=await fetch('schedule.json'); if(!r.ok)throw new Error(); const d=await r.json(); const e=d.find(x=>x.date===getMoscowDate()); if(playerEl) playerEl.innerHTML=e?`👤 Дежурный: <span>${e.player}</span>`:'📅 Нет смены';}catch{if(playerEl) playerEl.textContent='⚠️ Ошибка';}};
             updateClock(); setInterval(updateClock,1000); loadPlayer();
         });
     </script>

@@ -14,7 +14,9 @@
     <nav class="main-nav">
         <div class="nav-links">
             <a href="index.html">📚 Руководство</a>
-            <a href="train_schedule.html" class="active">🚂 Расписание</a>
+            <a href="train_schedule.html"class="active">🚂 Расписание</a>
+            <a href="promocodes.html">🎁 Промокоды</a>
+            <a href="pandora.html" >⚔️ Пандора</a>
         </div>
         <div class="nav-widget">
             <div id="msk-clock" class="nav-clock">⏳ --:--</div>
@@ -34,7 +36,7 @@
             </h1>
             <div class="version-tag">
                 <span class="version-label">ЗАГРУЗКА</span>
-                <span class="version-number">8:00 ±</span>
+                <span class="version-number">20:00 ±</span>
             </div>
         </header>
 
@@ -46,7 +48,7 @@
                 <div class="rule-item">
                     <span class="icon">⏰</span>
                     <span class="label">Время</span>
-                    <span class="value">8:00 ±</span>
+                    <span class="value">20:00 ±</span>
                 </div>
                 <div class="rule-item">
                     <span class="icon">📅</span>
@@ -65,7 +67,40 @@
                 </div>
             </div>
 
-            <div id="schedule-container" class="schedule-list">
+            <section class="content-section">
+                <div class="section-number">📦</div>
+                <h2>⚙️ ПРАВИЛА ОБНОВЛЕНИЯ ПОЕЗДА</h2>
+
+                <div class="golden-rule-box">
+                    <span class="rule-emoji">🔄</span>
+                    <div class="rule-content">
+                        <strong>ОСНОВНАЯ ЦЕЛЬ:</strong> Поезд необходимо обновить <strong>5 раз</strong>.
+
+                        Для каждого обновления каждый участник (пассажир) обязан передать <strong>минимум 2 контракта</strong>.
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">📊</div>
+                    <div class="info-content">
+                        <strong>Математика цикла:</strong>
+
+                        • Всего обновлений за цикл: <strong>5</strong>
+
+                        • Контрактов на одного пассажира за обновление: <strong>2</strong>
+
+                        • Итого на каждого участника: <strong>10 контрактов</strong>
+
+
+
+                        Сдавайте ресурсы вовремя. Без участия каждого пассажира поезд не получит нужное количество обновлений, и альянс потеряет награды.
+                    </div>
+                </div>
+
+
+            </section>
+
+            <div id="schedule-container" class="schedule-months">
                 <div class="loading">
                     <div class="spinner"></div>
                     <p>Загрузка расписания...</p>
@@ -83,10 +118,9 @@
             <div class="footer-decoration"></div>
         </footer>
     </div>
-
     <script>
-        // Частицы
         document.addEventListener('DOMContentLoaded', function() {
+            // Частицы
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
                 const p = document.createElement('div');
@@ -98,11 +132,11 @@
                 particlesContainer.appendChild(p);
             }
 
-            // Часы + игрок (общий код)
+            // Часы + игрок
             const clockEl = document.getElementById('msk-clock');
             const playerEl = document.getElementById('nav-player-info');
             const getMoscowDate = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Moscow' });
-            
+
             const updateClock = () => {
                 const now = new Date();
                 const t = now.toLocaleTimeString('ru-RU', { timeZone:'Europe/Moscow', hour:'2-digit', minute:'2-digit' });
@@ -120,10 +154,11 @@
             };
             updateClock(); setInterval(updateClock,1000); loadPlayer();
 
-            // Загрузка расписания
+            // Загрузка расписания по месяцам
             const container = document.getElementById('schedule-container');
-            const daysRu = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
-            
+            const daysRu = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+            const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+
             const loadSchedule = async () => {
                 try {
                     const res = await fetch('harddata/schedule.json');
@@ -131,31 +166,66 @@
                     const data = await res.json();
                     container.innerHTML = '';
                     const today = getMoscowDate();
-                    
+
+                    // Группируем по месяцам
+                    const byMonth = {};
                     data.forEach(entry => {
                         const d = new Date(entry.date);
                         if (isNaN(d)) return;
-                        const isToday = entry.date === today;
-                        const item = document.createElement('div');
-                        item.className = `schedule-item${isToday?' today':''}`;
-                        item.innerHTML = `
-                            <span class="schedule-date">${d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'})} (${daysRu[d.getDay()]})</span>
-                            <span class="schedule-player">
-                                ${entry.player}
-                                ${isToday?'<span class="schedule-badge">СЕГОДНЯ</span>':''}
-                            </span>
-                        `;
-                        container.appendChild(item);
+                        const monthKey = `${d.getFullYear()}-${d.getMonth()}`;
+                        if (!byMonth[monthKey]) {
+                            byMonth[monthKey] = {
+                                year: d.getFullYear(),
+                                month: d.getMonth(),
+                                entries: []
+                            };
+                        }
+                        byMonth[monthKey].entries.push(entry);
                     });
+
+                    // Создаём блоки для каждого месяца
+                    Object.values(byMonth).forEach(monthData => {
+                        const monthSection = document.createElement('div');
+                        monthSection.className = 'schedule-month';
+
+                        const monthTitle = document.createElement('h3');
+                        monthTitle.className = 'month-title';
+                        monthTitle.textContent = `${monthNames[monthData.month].toUpperCase()} ${monthData.year}`;
+                        monthSection.appendChild(monthTitle);
+
+                        const list = document.createElement('div');
+                        list.className = 'schedule-list';
+
+                        monthData.entries.forEach(entry => {
+                            const d = new Date(entry.date);
+                            const isToday = entry.date === today;
+                            const item = document.createElement('div');
+                            item.className = `schedule-item${isToday?' today':''}`;
+                            item.innerHTML = `
+                        <span class="schedule-date">${d.getDate()} ${monthNames[d.getMonth()].slice(0,3)} (${daysRu[d.getDay()]})</span>
+                        <span class="schedule-player">
+                            ${entry.player}
+                            ${isToday?'<span class="schedule-badge">СЕГОДНЯ</span>':''}
+                        </span>
+                    `;
+                            list.appendChild(item);
+                        });
+
+                        monthSection.appendChild(list);
+                        container.appendChild(monthSection);
+                    });
+
                 } catch (err) {
                     container.innerHTML = `<div class="info-box" style="border-left-color:var(--accent-red);background:rgba(255,56,96,0.1)">
-                        <div class="info-icon">⚠️</div>
-                        <div class="info-content">Ошибка загрузки. Откройте через локальный сервер (Live Server).</div>
-                    </div>`;
+                <div class="info-icon">⚠️</div>
+                <div class="info-content">Ошибка загрузки. Откройте через локальный сервер (Live Server).</div>
+            </div>`;
                 }
             };
             loadSchedule();
         });
     </script>
+
+
 </body>
 </html>
